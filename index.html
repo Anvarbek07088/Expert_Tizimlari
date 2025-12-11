@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kompyuter Nosozliklarini Aniqlash Ekspert Tizimi</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sarlavha qismi -->
+        <header class="header">
+            <h1><i class="fas fa-robot"></i> Kompyuter Nosozliklarini Aniqlash Ekspert Tizimi</h1>
+            <p class="subtitle">Ekspert tizimi - faktlar, qoidalar va inferensiya asosida diagnostika</p>
+        </header>
+
+        <!-- Asosiy kontent -->
+        <main class="main-content">
+            <div class="layout">
+                <!-- Chap panel: Belgilar tanlash -->
+                <section class="symptoms-section">
+                    <div class="card">
+                        <h2><i class="fas fa-clipboard-check"></i> Belgilarni tanlang</h2>
+                        <p class="instruction">Quyidagi belgilardan bir yoki bir nechtasini tanlang:</p>
+                        
+                        <div class="symptoms-grid">
+                            <label class="symptom-card" for="power">
+                                <input type="checkbox" id="power">
+                                <div class="symptom-content">
+                                    <i class="fas fa-power-off symptom-icon"></i>
+                                    <h3>Kompyuter yoqilmayapti</h3>
+                                    <p>Quvvat tugmasini bosganingizda hech qanday reaksiya yo'q</p>
+                                </div>
+                                <span class="checkmark"><i class="fas fa-check"></i></span>
+                            </label>
+                            
+                            <label class="symptom-card" for="fan">
+                                <input type="checkbox" id="fan">
+                                <div class="symptom-content">
+                                    <i class="fas fa-fan symptom-icon"></i>
+                                    <h3>Ventilyator aylanmayapti</h3>
+                                    <p>Kompyuter ichidan hech qanday shovqin eshitilmayapti</p>
+                                </div>
+                                <span class="checkmark"><i class="fas fa-check"></i></span>
+                            </label>
+                            
+                            <label class="symptom-card" for="noDisplay">
+                                <input type="checkbox" id="noDisplay">
+                                <div class="symptom-content">
+                                    <i class="fas fa-desktop symptom-icon"></i>
+                                    <h3>Tasvir chiqmayapti</h3>
+                                    <p>Monitor ekranida hech narsa ko'rinmayapti</p>
+                                </div>
+                                <span class="checkmark"><i class="fas fa-check"></i></span>
+                            </label>
+                            
+                            <label class="symptom-card" for="noSignal">
+                                <input type="checkbox" id="noSignal">
+                                <div class="symptom-content">
+                                    <i class="fas fa-plug symptom-icon"></i>
+                                    <h3>Monitor signal bermayapti</h3>
+                                    <p>Monitor "signal yo'q" xabarini ko'rsatayapti</p>
+                                </div>
+                                <span class="checkmark"><i class="fas fa-check"></i></span>
+                            </label>
+                            
+                            <label class="symptom-card" for="beep">
+                                <input type="checkbox" id="beep">
+                                <div class="symptom-content">
+                                    <i class="fas fa-volume-up symptom-icon"></i>
+                                    <h3>To'xtovsiz ovoz chiqayapti</h3>
+                                    <p>Kompyuterdan g'ijirlash yoki bip ovozlari eshitilayapti</p>
+                                </div>
+                                <span class="checkmark"><i class="fas fa-check"></i></span>
+                            </label>
+                            
+                            <label class="symptom-card" for="overheat">
+                                <input type="checkbox" id="overheat">
+                                <div class="symptom-content">
+                                    <i class="fas fa-thermometer-full symptom-icon"></i>
+                                    <h3>Kompyuter haddan tashqari isib ketadi</h3>
+                                    <p>Korpus qizib ketgan va issiq havo chiqayapti</p>
+                                </div>
+                                <span class="checkmark"><i class="fas fa-check"></i></span>
+                            </label>
+                        </div>
+                        
+                        <div class="buttons">
+                            <button id="diagnoseBtn" class="btn-primary">
+                                <i class="fas fa-stethoscope"></i> Diagnostika qilish
+                            </button>
+                            <button id="resetBtn" class="btn-secondary">
+                                <i class="fas fa-redo"></i> Tozalash
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- O'ng panel: Natija va qoidalar -->
+                <section class="results-section">
+                    <!-- Natija paneli -->
+                    <div class="card">
+                        <h2><i class="fas fa-diagnoses"></i> Diagnostika natijasi</h2>
+                        <div class="result-container">
+                            <div class="result-icon">
+                                <i class="fas fa-question-circle"></i>
+                            </div>
+                            <div class="result-content">
+                                <h3 id="diagnosisTitle">Tahlilni boshlang</h3>
+                                <p id="diagnosisText">Belgilarni tanlang va "Diagnostika qilish" tugmasini bosing.</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Tavsiyalar -->
+                        <div id="recommendations" class="recommendations hidden">
+                            <h3><i class="fas fa-tools"></i> Taklif etilgan choralar:</h3>
+                            <ul id="recommendationsList"></ul>
+                        </div>
+                        
+                        <!-- Aniqlik darajasi -->
+                        <div class="confidence-container">
+                            <h4>Aniqlik darajasi:</h4>
+                            <div class="confidence-bar">
+                                <div id="confidenceLevel" class="confidence-fill" style="width: 0%"></div>
+                            </div>
+                            <span id="confidencePercent">0%</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Qoidalar paneli -->
+                    <div class="card rules-card">
+                        <h2><i class="fas fa-list-alt"></i> Ekspert tizimi qoidalari</h2>
+                        <div class="rules-list">
+                            <div class="rule">
+                                <div class="rule-number">1</div>
+                                <div class="rule-content">
+                                    <p><strong>Agar:</strong> Kompyuter yoqilmayapti VA Ventilyator aylanmayapti</p>
+                                    <p><strong>Unda:</strong> Quvvat bloki nosoz</p>
+                                </div>
+                            </div>
+                            <div class="rule">
+                                <div class="rule-number">2</div>
+                                <div class="rule-content">
+                                    <p><strong>Agar:</strong> Tasvir chiqmayapti VA Monitor signal bermayapti</p>
+                                    <p><strong>Unda:</strong> Videokarta signal bermayapti</p>
+                                </div>
+                            </div>
+                            <div class="rule">
+                                <div class="rule-number">3</div>
+                                <div class="rule-content">
+                                    <p><strong>Agar:</strong> Monitor signal bermayapti</p>
+                                    <p><strong>Unda:</strong> Kabelni tekshirish kerak</p>
+                                </div>
+                            </div>
+                            <div class="rule">
+                                <div class="rule-number">4</div>
+                                <div class="rule-content">
+                                    <p><strong>Agar:</strong> Tasvir yo'q, lekin monitor yoniq</p>
+                                    <p><strong>Unda:</strong> Monitor sozlamalari noto'g'ri</p>
+                                </div>
+                            </div>
+                            <div class="rule">
+                                <div class="rule-number">5</div>
+                                <div class="rule-content">
+                                    <p><strong>Agar:</strong> To'xtovsiz ovoz chiqayapti</p>
+                                    <p><strong>Unda:</strong> Xotira yoki protsessor muammosi</p>
+                                </div>
+                            </div>
+                            <div class="rule">
+                                <div class="rule-number">6</div>
+                                <div class="rule-content">
+                                    <p><strong>Agar:</strong> Haddan tashqari isib ketadi</p>
+                                    <p><strong>Unda:</strong> Sovutish tizimi ishlamayapti</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        
+        <!-- Ma'lumot paneli -->
+        <footer class="footer">
+            <div class="info-cards">
+                <div class="info-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Faktlar bazasi</h3>
+                    <p>6 ta belgi (fakt)</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-project-diagram"></i>
+                    <h3>Qoidalar bazasi</h3>
+                    <p>6 ta IF-THEN qoida</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Inferensiya mexanizmi</h3>
+                    <p>Oldindan belgilangan qoidalar</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-history"></i>
+                    <h3>Qaror qabul qilish</h3>
+                    <p>Bir nechta qoidalarni baholash</p>
+                </div>
+            </div>
+            
+            <div class="system-info">
+                <p><strong>Ekspert tizimi:</strong> Faktlar + Qoidalar + Inferensiya = Xulosa</p>
+                <p class="copyright">© 2023 Kompyuter Nosozliklarini Aniqlash Ekspert Tizimi | "Ekspert tizimlari va ularni loyihalash" amaliy ishi</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
